@@ -73,4 +73,5 @@ const puppeteer = require('puppeteer');
 
   // Close the browser
   console.log('Closing the browser...');
-  await browser.cl
+  await browser.close();
+})();
