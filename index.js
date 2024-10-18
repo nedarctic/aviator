@@ -42,6 +42,20 @@ const puppeteer = require('puppeteer');
   const iframeTitle = await iframe.title();
   console.log('Title:', iframeTitle);
 
+  // URL
+  const iframeURL = await iframe.evaluate(() => window.location.href);
+  console.log('iframe URL:', iframeURL);
+
+  // Images
+  await iframe.waitForSelector('img');
+  const iframeImages = await iframe.evaluate(() => Array.from(document.querySelectorAll('img')).map(img => ({src: img.src, alt: img.alt})));
+  console.log('iframe images:', iframeImages);
+
+  // HTML
+  await iframe.waitForSelector('body');
+  const iframeHTML = await iframe.evaluate(() => document.body.innerHTML);
+  console.log('iframe HTML:', iframeHTML);
+
   // Give some time for responses to be captured
   new Promise(resolve => setTimeout(resolve, 5000));
 
